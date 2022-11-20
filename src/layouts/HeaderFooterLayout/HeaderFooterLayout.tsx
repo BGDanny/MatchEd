@@ -14,7 +14,6 @@ export const HeaderFooterLayout: React.FunctionComponent<Props> = (props) => {
             <Box>
                 {props.children}
             </Box>
-            <Footer />
         </Box>
     )
 }

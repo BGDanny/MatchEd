@@ -2,7 +2,7 @@ import React from "react";
 import { useAuth } from "../../Context/AuthProvider";
 import { HeaderFooterLayout } from "../../layouts/HeaderFooterLayout/HeaderFooterLayout";
 import { useLocation } from "react-router-dom";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import CTA from "../../components/CTA";
 
 export const Home: React.FC = () => {
@@ -18,14 +18,10 @@ export const Home: React.FC = () => {
     return (
         <HeaderFooterLayout>
             {user ? (
-                <h1>Welcome to MatchEd, {user.first_name}</h1>
+                <Typography variant="subtitle1">Welcome to MatchEd, {user.first_name}</Typography>
             ) : (
                 <Box>
                     <CTA />
-                    <h1>
-                        Welcome to MatchEd. Please sign up or login to access all
-                        the features
-                    </h1>
                 </Box>
             )}
         </HeaderFooterLayout>
