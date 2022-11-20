@@ -3,7 +3,7 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import { MainPage } from "./components";
+import Home from "./pages/Home";
 import { User } from "./model";
 import { AuthContext } from "./Context/AuthProvider";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
@@ -14,7 +14,12 @@ const App: React.FC = () => {
     return (
         <ThemeProvider theme={createTheme()}>
             <AuthContext.Provider value={{ user, setUser }}>
-                <MainPage />
+                {/* <Routes>
+                  <Route path="/" element={<MainPage />} />
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/signup" element={<SignupPage />} />
+              </Routes> */}
+                <Home />
             </AuthContext.Provider>
         </ThemeProvider>
     );

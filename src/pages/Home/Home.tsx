@@ -1,10 +1,10 @@
 import React from "react";
-import { useAuth } from "../Context/AuthProvider";
-import { LoginModal } from "./LoginModal";
-import { SignupModal } from "./SignupModal";
+import { useAuth } from "../../Context/AuthProvider";
+import LoginModal from "../../components/LoginModal";
+import SignupModal from "../../components/SignupModal";
 import Button from "@mui/material/Button";
 
-export const MainPage: React.FC = () => {
+export const Home: React.FC = () => {
     const { user } = useAuth();
     const [isLoginModalOpen, setLoginModalOpen] = React.useState(false);
     const [isSignupModalOpen, setSignupModalOpen] = React.useState(false);
