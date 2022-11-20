@@ -20,8 +20,10 @@ export const Home: React.FC = () => {
         <HeaderFooterLayout>
             {user ? (
                 <>
-                    <Typography variant="subtitle1">
-                        Welcome to MatchEd, {user.first_name}
+                    <Typography variant="h6" sx={{
+                        marginY: "20px"
+                    }}>
+                        Belows are your latest news for your interests, {user.first_name}
                     </Typography>
                     <News />
                 </>
