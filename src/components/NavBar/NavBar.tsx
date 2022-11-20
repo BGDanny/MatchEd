@@ -21,7 +21,8 @@ export const NavBar: React.FC = () => {
             src={logo}
         />
         <Box sx={{
-            display: "flex"
+            display: "flex",
+            gap: "10px"
         }}>
             <Button variant="outlined">Log In</Button>
             <Button variant="outlined">Sign up</Button>
