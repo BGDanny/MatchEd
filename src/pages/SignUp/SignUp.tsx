@@ -21,7 +21,7 @@ import { useNavigate } from "react-router-dom";
 import { User } from "../../model";
 import { LoadingButton } from "@mui/lab";
 
-const interestsList = [
+export const interestsList = [
     "General",
     "Computer Science",
     "Engineering",

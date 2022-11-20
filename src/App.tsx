@@ -10,7 +10,6 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import MentorList from "./pages/MentorList";
 
 const App: React.FC = () => {
     const [user, setUser] = React.useState<User | undefined>(undefined);
@@ -25,7 +24,6 @@ const App: React.FC = () => {
                         <Route path="/" element={<Home />} index />
                         <Route path="/login" element={<SignIn />} />
                         <Route path="/signup" element={<SignUp />} />
-                        <Route path="/mentor" element={<MentorList />} />
                     </Routes>
                 </BrowserRouter>
             </AuthContext.Provider>
