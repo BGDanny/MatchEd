@@ -3,10 +3,12 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import Home from "./pages/Home";
 import { User } from "./model";
 import { AuthContext } from "./Context/AuthProvider";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import SignIn from "./pages/SignIn";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
 
 const App: React.FC = () => {
     const [user, setUser] = React.useState<User | undefined>(undefined);
@@ -14,12 +16,12 @@ const App: React.FC = () => {
     return (
         <ThemeProvider theme={createTheme()}>
             <AuthContext.Provider value={{ user, setUser }}>
-                {/* <Routes>
-                  <Route path="/" element={<MainPage />} />
-                  <Route path="/login" element={<LoginPage />} />
-                  <Route path="/signup" element={<SignupPage />} />
-              </Routes> */}
-                <Home />
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<Home />} index />
+                        <Route path="/login" element={<SignIn />} />
+                    </Routes>
+                </BrowserRouter>
             </AuthContext.Provider>
         </ThemeProvider>
     );
