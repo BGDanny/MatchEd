@@ -15,7 +15,7 @@ import {
     MenuItem,
     Dialog,
     TextField,
-    DialogTitle
+    DialogTitle,
 } from "@mui/material";
 import { interestsList } from "../SignUp/SignUp";
 import { fetchApi } from "../../api";
@@ -31,14 +31,11 @@ export const MentorComponent: React.FC<any> = ({
     const [matchOpen, setMatchOpen] = React.useState(false);
     const [matchMessage, setMatchMessage] = React.useState("");
     const { user } = useAuth();
+    const avatar = React.useRef(faker.image.avatar());
 
     return (
         <Card sx={{ height: "fit-content", margin: "auto" }}>
-            <CardMedia
-                component="img"
-                height="300"
-                image={faker.image.avatar()}
-            />
+            <CardMedia component="img" height="300" image={avatar.current} />
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
                     {first_name} {last_name}

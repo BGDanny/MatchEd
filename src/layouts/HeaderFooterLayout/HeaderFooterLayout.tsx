@@ -10,7 +10,7 @@ export const HeaderFooterLayout: React.FunctionComponent<Props> = (props) => {
     return (
         <Box >
             <NavBar />
-            <Box>
+            <Box sx={{marginX:"80px"}}>
                 {props.children}
             </Box>
         </Box>

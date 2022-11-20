@@ -18,19 +18,22 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 
-export const PeopleList: React.FC<any> = (props) => {
+export const PeopleList: React.FC<{ people: any[] }> = ({ people }) => {
+    if(!people.length){
+        return null;
+    }
     return (
         <List
             sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
         >
-            {props.map((people: any) => {
+            {people.map((person: any) => {
                 return (
                     <ListItem alignItems="flex-start">
                         <ListItemAvatar>
                             <Avatar src="https://thispersondoesnotexist.com/image" />
                         </ListItemAvatar>
                         <ListItemText
-                            primary={`${people.first_name} ${people.last_name}`}
+                            primary={`${person.first_name} ${person.last_name}`}
                             secondary={
                                 <React.Fragment>
                                     <Typography
@@ -39,9 +42,8 @@ export const PeopleList: React.FC<any> = (props) => {
                                         variant="body2"
                                         color="text.primary"
                                     >
-                                        Ali Connors
+                                        {person.email}
                                     </Typography>
-                                    {people.email}
                                 </React.Fragment>
                             }
                         />
@@ -55,32 +57,25 @@ export const PeopleList: React.FC<any> = (props) => {
 export const Home: React.FC = () => {
     const { user, setUser } = useAuth();
     const { state } = useLocation();
-    const [messages, setMessages] = React.useState<any[]>();
-    const [mentee, setMentee] = React.useState<any[]>();
-    const [mentor, setMentor] = React.useState<any[]>();
+    const [messages, setMessages] = React.useState<any[]>([]);
+    const [mentee, setMentee] = React.useState<any[]>([]);
+    const [mentor, setMentor] = React.useState<any[]>([]);
 
     React.useEffect(() => {
         if (state) {
             setUser(state);
         }
     }, [state, setUser]);
+
     React.useEffect(() => {
         if (user) {
-            fetchApi("/hello?id=" + user.id)
+            fetchApi("/request?id=" + user.id)
                 .then((res) => res.json())
                 .then((data) => setMessages(data));
-        }
-    }, [user]);
-    React.useEffect(() => {
-        if (user) {
-            fetchApi("/getMentee?id=" + user.id)
+            fetchApi("/profile/getMentee?id=" + user.id)
                 .then((res) => res.json())
                 .then((data) => setMentee(data));
-        }
-    }, [user]);
-    React.useEffect(() => {
-        if (user) {
-            fetchApi("/getMentor?id=" + user.id)
+            fetchApi("/profile/getMentor?id=" + user.id)
                 .then((res) => res.json())
                 .then((data) => setMentor(data));
         }
@@ -95,7 +90,7 @@ export const Home: React.FC = () => {
                     mentorId: user.id,
                     menteeId: id,
                 })
-            ).then(window.location.reload);
+            ).then(() => window.location.reload());
         }
     };
 
@@ -108,26 +103,10 @@ export const Home: React.FC = () => {
                     mentorId: user.id,
                     menteeId: id,
                 })
-            ).then(window.location.reload);
+            ).then(() => window.location.reload());
         }
     };
 
-    let peopleList;
-    if (user && user.type === "Mentor") {
-        peopleList = (
-            <>
-                <h6>Matched Mentees</h6>
-                <PeopleList props={mentee} />
-            </>
-        );
-    } else {
-        peopleList = (
-            <>
-                <h6>Matched Mentors</h6>
-                <PeopleList props={mentor} />
-            </>
-        );
-    }
     return (
         <HeaderFooterLayout>
             {user ? (
@@ -143,52 +122,64 @@ export const Home: React.FC = () => {
                     </Typography>
                     <News />
                     {user.type === "Mentee" && <MentorList />}
+                    {messages?.map((message) => {
+                        return (
+                            <Card sx={{ maxWidth: 345 }}>
+                                <CardContent>
+                                    <Typography
+                                        gutterBottom
+                                        variant="h5"
+                                        component="div"
+                                    >
+                                        {message.first_name} {message.last_name}
+                                    </Typography>
+                                    <Typography
+                                        variant="body2"
+                                        color="text.secondary"
+                                    >
+                                        {message.match_message}
+                                    </Typography>
+                                </CardContent>
+                                <CardActions>
+                                    <Button
+                                        size="small"
+                                        onClick={() => handleAccept(message.id)}
+                                    >
+                                        Accept
+                                    </Button>
+                                    <Button
+                                        size="small"
+                                        onClick={() => handleReject(message.id)}
+                                    >
+                                        Reject
+                                    </Button>
+                                </CardActions>
+                            </Card>
+                        );
+                    })}
+                    <Box sx={{ margin: "auto", marginTop:"20px" }}>
+                        {user.type === "Mentor" ? (
+                            <>
+                                <Typography variant="h6" >
+                                    Matched Mentees
+                                </Typography>
+                                <PeopleList people={mentee} />
+                            </>
+                        ) : (
+                            <>
+                                <Typography variant="h6">
+                                    Matched Mentors
+                                </Typography>
+                                <PeopleList people={mentor} />
+                            </>
+                        )}
+                    </Box>
                 </>
             ) : (
                 <Box>
                     <CTA />
                 </Box>
             )}
-
-            <>
-                {messages?.map((message, index) => {
-                    return (
-                        <Card sx={{ maxWidth: 345 }}>
-                            <CardContent>
-                                <Typography
-                                    gutterBottom
-                                    variant="h5"
-                                    component="div"
-                                >
-                                    {message.first_name} {message.last_name}
-                                </Typography>
-                                <Typography
-                                    variant="body2"
-                                    color="text.secondary"
-                                >
-                                    {message.match_message}
-                                </Typography>
-                            </CardContent>
-                            <CardActions>
-                                <Button
-                                    size="small"
-                                    onClick={() => handleAccept(message.id)}
-                                >
-                                    Accept
-                                </Button>
-                                <Button
-                                    size="small"
-                                    onClick={() => handleReject(message.id)}
-                                >
-                                    Reject
-                                </Button>
-                            </CardActions>
-                        </Card>
-                    );
-                })}
-            </>
-
-            {peopleList}
         </HeaderFooterLayout>
     );
 };
