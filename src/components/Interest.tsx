@@ -11,16 +11,14 @@ import {
     Accordion,
 } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
+import { fetchApi } from "../api";
 
 export const Interest: React.FC<{ name: string }> = ({ name }) => {
     const [articles, setArticles] = React.useState<any[]>([]);
 
     React.useEffect(() => {
-        fetch(
-            `https://newsapi.org/v2/everything?q=${name}&sortBy=popularity&apiKey=72a551cf0da246c7abde552db5f33b85`
-        )
-            .then((res) => res.json())
-            .then((data) => setArticles(data.articles.slice(0, 5)));
+        fetchApi(`/hello?name=${name}`, "GET").then((res) => res.json())
+            .then((data) => setArticles(data.slice(0, 5)));
     }, [name]);
 
     return (
@@ -28,9 +26,16 @@ export const Interest: React.FC<{ name: string }> = ({ name }) => {
             <AccordionSummary expandIcon={<ExpandMore />}>
                 <Typography>{name}</Typography>
             </AccordionSummary>
-            <AccordionDetails sx={{ display: "flex",flexWrap:"wrap",gap: 5, justifyContent:"center" }}>
+            <AccordionDetails sx={{ display: "flex", flexWrap: "wrap", gap: 5, justifyContent: "center" }}>
                 {articles.map((article, index) => (
-                    <Card sx={{ width: "30%" }} key={index}>
+                    <Card sx={{
+                        width: "30%",
+                        ':hover': {
+                            boxShadow: 10, // theme.shadows[20]
+                            transform: "scale(1.02) perspective(0px)",
+                            transition: "transform .5s, box-shadow 1s"
+                        },
+                    }} key={index}>
                         <CardMedia
                             component="img"
                             height="140"
