@@ -1,4 +1,4 @@
-import { Box, Button, Chip } from "@mui/material";
+import { Button, Chip } from "@mui/material";
 import { HeaderFooterLayout } from "../../layouts/HeaderFooterLayout/HeaderFooterLayout"
 import { faker } from '@faker-js/faker';
 import { Typography } from '@mui/material';
