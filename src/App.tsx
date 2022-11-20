@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+import { MainPage } from "./components";
+import { User } from "./model";
+import { AuthContext } from "./Context/AuthProvider";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App: React.FC = () => {
+    const [user, setUser] = React.useState<User | undefined>(undefined);
+
+    return (
+        <ThemeProvider theme={createTheme()}>
+            <AuthContext.Provider value={{ user, setUser }}>
+                {/* <Routes>
+                  <Route path="/" element={<MainPage />} />
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/signup" element={<SignupPage />} />
+              </Routes> */}
+                <MainPage />
+            </AuthContext.Provider>
+        </ThemeProvider>
+    );
+};
 
 export default App;
