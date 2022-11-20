@@ -9,6 +9,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import SignIn from "./pages/SignIn";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import MentorList from "./pages/MentorList";
 
 const App: React.FC = () => {
     const [user, setUser] = React.useState<User | undefined>(undefined);
@@ -20,6 +21,7 @@ const App: React.FC = () => {
                     <Routes>
                         <Route path="/" element={<Home />} index />
                         <Route path="/login" element={<SignIn />} />
+                        <Route path="/mentor" element={<MentorList />} />
                     </Routes>
                 </BrowserRouter>
             </AuthContext.Provider>
