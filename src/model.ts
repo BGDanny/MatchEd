@@ -9,6 +9,7 @@ export interface User {
     type: string;
     password?: string;
     labels?: string;
+    id?: string;
 }
 
 export interface AuthProviderProps {
