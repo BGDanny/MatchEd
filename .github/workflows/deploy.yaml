@@ -1,7 +1,7 @@
 on:
   release:
     types: [created]
-name: Test
+name: Deploy
 jobs:
   test-infra:
     name: Test AWS Infrastructure
