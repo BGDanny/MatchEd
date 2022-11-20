@@ -34,4 +34,6 @@ export const Home: React.FC = () => {
                 </>
             </HeaderFooterLayout>
         )
+
+    return <HeaderFooterLayout></HeaderFooterLayout>;
 };

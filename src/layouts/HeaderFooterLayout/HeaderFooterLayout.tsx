@@ -3,7 +3,7 @@ import Footer from "../../components/Footer"
 import NavBar from "../../components/NavBar"
 
 type Props = {
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 export const HeaderFooterLayout: React.FunctionComponent<Props> = (props) => {
