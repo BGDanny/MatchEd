@@ -1,39 +1,28 @@
 import React from "react";
 import { useAuth } from "../../Context/AuthProvider";
-import LoginModal from "../../components/LoginModal";
-import SignupModal from "../../components/SignupModal";
-import Button from "@mui/material/Button";
 import { HeaderFooterLayout } from "../../layouts/HeaderFooterLayout/HeaderFooterLayout";
+import { useLocation } from "react-router-dom";
 
 export const Home: React.FC = () => {
-    const { user } = useAuth();
-    const [isLoginModalOpen, setLoginModalOpen] = React.useState(false);
-    const [isSignupModalOpen, setSignupModalOpen] = React.useState(false);
+    const { user, setUser } = useAuth();
+    const { state } = useLocation();
 
-    if (user)
-        return (
-            <HeaderFooterLayout>
-                <h1>Welcome to MatchEd, {user.firstName}</h1>
-                <>
-                    <div>
-                        Welcome to MatchEd. Please sign up or login to access all the
-                        features
-                    </div>
-                    <Button variant="contained" onClick={() => setLoginModalOpen(true)}>
-                        Login
-                    </Button>
-                    <Button variant="outlined" onClick={() => setSignupModalOpen(true)}>Sign up</Button>
-                    <LoginModal
-                        open={isLoginModalOpen}
-                        onClose={() => setLoginModalOpen(false)}
-                    />
-                    <SignupModal
-                        open={isSignupModalOpen}
-                        onClose={() => setSignupModalOpen(false)}
-                    />
-                </>
-            </HeaderFooterLayout>
-        )
+    React.useEffect(() => {
+        if (state) {
+            setUser(state);
+        }
+    }, [state, setUser]);
 
-    return <HeaderFooterLayout></HeaderFooterLayout>;
+    return (
+        <HeaderFooterLayout>
+            {user ? (
+                <h1>Welcome to MatchEd, {user.first_name}</h1>
+            ) : (
+                <h1>
+                    Welcome to MatchEd. Please sign up or login to access all
+                    the features
+                </h1>
+            )}
+        </HeaderFooterLayout>
+    );
 };

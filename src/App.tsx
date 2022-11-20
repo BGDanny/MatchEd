@@ -7,6 +7,7 @@ import { User } from "./model";
 import { AuthContext } from "./Context/AuthProvider";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 
@@ -14,12 +15,15 @@ const App: React.FC = () => {
     const [user, setUser] = React.useState<User | undefined>(undefined);
 
     return (
-        <ThemeProvider theme={createTheme()}>
+        <ThemeProvider
+            theme={createTheme({ palette: { primary: { main: "#0ea175" } } })}
+        >
             <AuthContext.Provider value={{ user, setUser }}>
                 <BrowserRouter>
                     <Routes>
                         <Route path="/" element={<Home />} index />
                         <Route path="/login" element={<SignIn />} />
+                        <Route path="/signup" element={<SignUp />} />
                     </Routes>
                 </BrowserRouter>
             </AuthContext.Provider>

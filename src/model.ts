@@ -1,8 +1,14 @@
 import React from "react";
 
 export interface User {
-    firstName: string;
-    lastName: string;
+    first_name: string;
+    last_name: string;
+    interests: string[];
+    languages: string;
+    email: string;
+    type: string;
+    password?: string;
+    labels?: string;
 }
 
 export interface AuthProviderProps {

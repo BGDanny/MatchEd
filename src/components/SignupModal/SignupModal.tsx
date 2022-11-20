@@ -8,6 +8,7 @@ import {
     InputLabel,
 } from "@mui/material";
 import { ModalWrapper } from "./styles";
+import { User } from "../../model";
 
 const interestsList = [
     "General",
@@ -28,15 +29,9 @@ export const SignupModal: React.FC<{ open: boolean; onClose: () => void }> = ({
     onClose,
 }) => {
     const [userInput, setUserInput] = React.useState({
-        first_name: "",
-        last_name: "",
-        email: "",
-        password: "",
         languages: "English",
-        account_type: "",
-        labels: "",
-        interests: [] as string[],
-    });
+    } as User);
+    console.log(userInput);
 
     return (
         <Modal open={open} onClose={onClose}>
@@ -111,18 +106,18 @@ export const SignupModal: React.FC<{ open: boolean; onClose: () => void }> = ({
                 <InputLabel id="type">Account Type</InputLabel>
                 <Select
                     labelId="type"
-                    value={userInput.account_type}
+                    value={userInput.type}
                     onChange={(event) =>
                         setUserInput((prev) => ({
                             ...prev,
-                            account_type: event.target.value,
+                            type: event.target.value,
                         }))
                     }
                 >
                     <MenuItem value="Mentor">Mentor</MenuItem>
                     <MenuItem value="Mentee">Mentee</MenuItem>
                 </Select>
-                {userInput.account_type === "Mentor" && (
+                {userInput.type === "Mentor" && (
                     <>
                         <InputLabel id="label">Label</InputLabel>
                         <Select
