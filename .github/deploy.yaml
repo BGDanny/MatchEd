@@ -1,0 +1,30 @@
+on: push
+name: Test
+jobs:
+  test-infra:
+    name: Test AWS Infrastructure
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node and Caching
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16.15.0"
+          cache: "npm"
+          cache-dependency-path: |
+            infrastructure/package-lock.json
+            package-lock.json
+
+      - name: Build my-app
+        run: |
+          npm ci
+          npm run build
+
+      # This job will fail if we don't provide token for accessing
+      - name: Build Infrastructure
+        run: |
+          npm ci
+          npm run deploy
+        working-directory: infrastructure
