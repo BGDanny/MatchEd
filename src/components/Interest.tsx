@@ -17,7 +17,7 @@ export const Interest: React.FC<{ name: string }> = ({ name }) => {
 
     React.useEffect(() => {
         fetch(
-            `https://newsapi.org/v2/everything?q=${name}&sortBy=popularity&apiKey=72a551cf0da246c7abde552db5f33b85`
+            `https://newsapi.org/v2/everything?q=${name}&sortBy=popularity&apiKey=e787a6bc56e648bd805e5dac153a102e`
         )
             .then((res) => res.json())
             .then((data) => setArticles(data.articles.slice(0, 5)));
