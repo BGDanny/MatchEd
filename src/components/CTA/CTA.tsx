@@ -19,9 +19,9 @@ export const CTA: React.FC = () => {
             </Typography>
         </Typography>
         <Typography variant="body1" sx={{ marginTop: "20px" }}>
-            Monetize your content by charging your most loyal readers and reward
-            them loyalty points. Give back to your loyal readers by granting
-            them access to your pre-releases and sneak-peaks.
+            Connect your mentor made easy by using MatchED. Give back to your community
+            while learning the most yourself, MatchED is the platform allowing you to
+            connect mentors and mentees
         </Typography>
 
         <Button variant="contained" sx={{ marginTop: "20px" }} href="/login">
