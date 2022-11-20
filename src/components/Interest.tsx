@@ -28,9 +28,16 @@ export const Interest: React.FC<{ name: string }> = ({ name }) => {
             <AccordionSummary expandIcon={<ExpandMore />}>
                 <Typography>{name}</Typography>
             </AccordionSummary>
-            <AccordionDetails sx={{ display: "flex",flexWrap:"wrap",gap: 5, justifyContent:"center" }}>
+            <AccordionDetails sx={{ display: "flex", flexWrap: "wrap", gap: 5, justifyContent: "center" }}>
                 {articles.map((article, index) => (
-                    <Card sx={{ width: "30%" }} key={index}>
+                    <Card sx={{
+                        width: "30%",
+                        ':hover': {
+                            boxShadow: 10, // theme.shadows[20]
+                            transform: "scale(1.02) perspective(0px)",
+                            transition: "transform .5s, box-shadow 1s"
+                        },
+                    }} key={index}>
                         <CardMedia
                             component="img"
                             height="140"
