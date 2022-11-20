@@ -1,3 +1,4 @@
+//@ts-nocheck
 import * as React from "react";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import {
@@ -48,7 +49,10 @@ export const SignUp: React.FC = () => {
         setError(false);
         setLoading(true);
         fetchApi("/signUp", "POST", JSON.stringify(userInput))
-            .then(() => navigate("/", { state: userInput }))
+            .then((res) => res.json())
+            .then((data) => {
+                navigate("/", { state: { ...userInput, id: data.id } });
+            })
             .catch(() => {
                 setError(true);
             })
