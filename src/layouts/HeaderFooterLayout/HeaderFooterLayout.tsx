@@ -9,7 +9,7 @@ type Props = {
 export const HeaderFooterLayout: React.FunctionComponent<Props> = (props) => {
 
     return (
-        <Box>
+        <Box >
             <NavBar />
             <Box>
                 {props.children}

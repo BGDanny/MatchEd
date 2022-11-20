@@ -2,57 +2,48 @@ import { Box, Button, Chip } from "@mui/material";
 import { HeaderFooterLayout } from "../../layouts/HeaderFooterLayout/HeaderFooterLayout"
 import { faker } from '@faker-js/faker';
 import { Typography } from '@mui/material';
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Carousel from 'react-material-ui-carousel'
 
 export const MentorComponent: React.FC = () => {
     return (
-        <Box sx={{
-            display: "flex",
-            flexDirection: "row",
-            gap: "20px",
-            maxWidth: "60%",
-            borderRadius: "15px",
-            border: "2px solid #73AD21"
-        }}>
-            <Box
+        <Card sx={{ width: 500 }}>
+            <CardMedia
                 component="img"
-                sx={{
-                    height: 200,
-                }}
-                alt="Profile"
-                src={faker.image.avatar()}
+                alt="green iguana"
+                height="140"
+                image={faker.image.avatar()}
             />
-            <Box>
-                <Box sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    gap: "20px"
-                }}>
-                    <Typography sx={{ marginTop: "10px" }}><strong>{faker.name.fullName()}</strong></Typography>
-                    <Chip sx={{ marginTop: "10px" }} label="Computer Science" variant="outlined" />
-                </Box>
-                <Typography>{faker.lorem.paragraph()}</Typography>
-                <Button variant="outlined">Match</Button>
-            </Box>
-        </Box>
-    )
-
+            <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                    {faker.name.fullName()}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                    {faker.lorem.paragraph()}
+                </Typography>
+            </CardContent>
+            <CardActions>
+                <Button size="small">Share</Button>
+                <Button size="small">Learn More</Button>
+            </CardActions>
+        </Card>
+    );
 }
+
 export const MentorList: React.FC = () => {
     return <HeaderFooterLayout>
-        <Box sx={{
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column",
-            margin: "auto",
-            gap: "20px"
-        }}>
+        <Carousel navButtonsAlwaysVisible>
             <MentorComponent />
             <MentorComponent />
             <MentorComponent />
             <MentorComponent />
             <MentorComponent />
             <MentorComponent />
-        </Box>
+        </Carousel>
     </HeaderFooterLayout>
 }
+
