@@ -19,7 +19,7 @@ export const MainPage: React.FC = () => {
             <Button variant="contained" onClick={() => setLoginModalOpen(true)}>
                 Login
             </Button>
-            <Button variant="outlined">Sign up</Button>
+            <Button variant="outlined" onClick={() => setSignupModalOpen(true)}>Sign up</Button>
             <LoginModal
                 open={isLoginModalOpen}
                 onClose={() => setLoginModalOpen(false)}

@@ -24,6 +24,7 @@ export const LoginModal: React.FC<{ open: boolean; onClose: () => void }> = ({
                         }))
                     }
                     fullWidth
+                    margin="dense"
                 />
                 <TextField
                     label="Password"
@@ -35,6 +36,7 @@ export const LoginModal: React.FC<{ open: boolean; onClose: () => void }> = ({
                         }))
                     }
                     fullWidth
+                    margin="dense"
                 />
                 <Button fullWidth>Login</Button>
             </ModalWrapper>

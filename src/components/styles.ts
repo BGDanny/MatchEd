@@ -6,9 +6,5 @@ export const ModalWrapper = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    row-gap: 20px;
     padding: 20px;
 `;
