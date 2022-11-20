@@ -11,11 +11,10 @@ import Carousel from 'react-material-ui-carousel'
 
 export const MentorComponent: React.FC = () => {
     return (
-        <Card sx={{ width: 500 }}>
+        <Card sx={{ height: "fit-content", margin: "auto" }}>
             <CardMedia
                 component="img"
-                alt="green iguana"
-                height="140"
+                height="300"
                 image={faker.image.avatar()}
             />
             <CardContent>
@@ -27,8 +26,8 @@ export const MentorComponent: React.FC = () => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small">Share</Button>
-                <Button size="small">Learn More</Button>
+                <Button size="small" variant="outlined" color="success" sx={{ marginX: "4px" }}>Match</Button>
+                <Chip size="small" variant="outlined" label={"Computer Science"} />
             </CardActions>
         </Card>
     );
@@ -36,9 +35,7 @@ export const MentorComponent: React.FC = () => {
 
 export const MentorList: React.FC = () => {
     return <HeaderFooterLayout>
-        <Carousel navButtonsAlwaysVisible>
-            <MentorComponent />
-            <MentorComponent />
+        <Carousel navButtonsAlwaysVisible autoPlay={false} sx={{ width: "500px", height: "fit-content", margin: "auto" }}>
             <MentorComponent />
             <MentorComponent />
             <MentorComponent />
