@@ -18,7 +18,7 @@ export const Interest: React.FC<{ name: string }> = ({ name }) => {
 
     React.useEffect(() => {
         fetchApi(`/hello?name=${name}`, "GET").then((res) => res.json())
-            .then((data) => setArticles(data.articles.slice(0, 5)));
+            .then((data) => setArticles(data.slice(0, 5)));
     }, [name]);
 
     return (
