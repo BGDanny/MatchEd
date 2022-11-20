@@ -12,10 +12,49 @@ import {News} from "../../components/News";
 import {Box, Typography} from "@mui/material";
 import CTA from "../../components/CTA";
 
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Divider from '@mui/material/Divider';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+
+export const PeopleList: React.FC<any> = (props) => {
+    return <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+        // @ts-nocheck
+        {props?.map((people, index) => {
+            return <ListItem alignItems="flex-start">
+                <ListItemAvatar>
+                    <Avatar src="https://thispersondoesnotexist.com/image" />
+                </ListItemAvatar>
+                <ListItemText
+                    primary='${people.first_name} ${people.last_name}'
+                    secondary={
+                        <React.Fragment>
+                            <Typography
+                                sx={{ display: 'inline' }}
+                                component="span"
+                                variant="body2"
+                                color="text.primary"
+                            >
+                                Ali Connors
+                            </Typography>
+                            {" — I'll be in your neighborhood doing errands this…"}
+                        </React.Fragment>
+                    }
+                />
+            </ListItem>}
+        )}
+    </List>
+}
+
 export const Home: React.FC = () => {
     const {user, setUser} = useAuth();
     const {state} = useLocation();
     const [messages, setMessages] = React.useState<any[]>();
+    const [mentee, setMentee] = React.useState<any[]>();
+    const [mentor, setMentor] = React.useState<any[]>();
+
     React.useEffect(() => {
         if (state) {
             setUser(state);
@@ -24,6 +63,16 @@ export const Home: React.FC = () => {
     React.useEffect(() => {
         if (user) {
             fetchApi("/hello?id=" + user.id).then((res) => res.json()).then(data => setMessages(data))
+        }
+    }, [user])
+    React.useEffect(() => {
+        if (user) {
+            fetchApi("/getMentee?id=" + user.id).then((res) => res.json()).then(data => setMentee(data))
+        }
+    }, [user])
+    React.useEffect(() => {
+        if (user) {
+            fetchApi("/getMentor?id=" + user.id).then((res) => res.json()).then(data => setMentor(data))
         }
     }, [user])
 
@@ -53,6 +102,12 @@ export const Home: React.FC = () => {
         }
     };
 
+    let peopleList;
+    if(user&&user.type=="Mentor"){
+        peopleList=<><h6>Matched Mentees</h6><PeopleList props={mentee}/></>
+    } else {
+        peopleList=<><h6>Matched Mentors</h6><PeopleList props={mentor}/></>
+    }
     return (
         <HeaderFooterLayout>
             {user ? (
@@ -87,6 +142,9 @@ export const Home: React.FC = () => {
 
                 })}
             </>
+
+            {peopleList}
+
 
         </HeaderFooterLayout>
     );
