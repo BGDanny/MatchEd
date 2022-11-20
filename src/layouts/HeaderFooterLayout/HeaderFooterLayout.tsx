@@ -1,5 +1,4 @@
 import { Box } from "@mui/material"
-import Footer from "../../components/Footer"
 import NavBar from "../../components/NavBar"
 
 type Props = {
@@ -14,7 +13,6 @@ export const HeaderFooterLayout: React.FunctionComponent<Props> = (props) => {
             <Box>
                 {props.children}
             </Box>
-            <Footer />
         </Box>
     )
 }
